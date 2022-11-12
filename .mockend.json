@@ -1,8 +1,8 @@
 {
   "Point": {
-    "coordinates": [
-      { "int": { "min": 0, "max": 100 } },
-      { "int": { "min": 0, "max": 100 } }
-    ]
+    "coordinates": {
+      "lat": { "int": { "min": 0, "max": 1000000 } },
+      "long": { "int": { "min": 0, "max": 1000000 } }
+    }
   }
 }
