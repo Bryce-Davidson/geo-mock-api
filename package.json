@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/Bryce-Davidson/geo-mock-api/issues"
   },
-  "homepage": "https://github.com/Bryce-Davidson/geo-mock-api#readme"
+  "homepage": "https://github.com/Bryce-Davidson/geo-mock-api#readme",
+  "dependencies": {
+    "@ngneat/falso": "^6.1.0"
+  }
 }
