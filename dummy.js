@@ -1,42 +1,46 @@
-import { randFloat } from "@ngneat/falso";
+import {
+  randFloat,
+  randUserName,
+  randText,
+  randCompanyName,
+} from "@ngneat/falso";
 import fs from "fs";
 
-function lat() {
+function randLat() {
   return randFloat({ min: 48.45372, max: 48.426731, fraction: 6 });
 }
-function lon() {
+function randLon() {
   return randFloat({ min: -123.310109, max: -123.391863, fraction: 6 });
 }
 
-const bbox = () => {
-  const string = `${coord()},${coord()}`;
-  return string;
-};
-
-function pointFeature() {
+function randPointFeature() {
   const point = {
     type: "Feature",
-    properties: {},
+    properties: {
+      name: randCompanyName(),
+      user: randUserName(),
+      description: randText({ charCount: 250 }),
+    },
     geometry: {
-      coordinates: [lon(), lat()],
+      coordinates: [randLon(), randLat()],
       type: "Point",
     },
   };
   return point;
 }
 
-function randomPointsCollection() {
+function randPointsCollection() {
   let collection = {
     type: "FeatureCollection",
     features: [],
   };
   for (let index = 0; index < 10; index++) {
-    collection.features.push(pointFeature());
+    collection.features.push(randPointFeature());
   }
   return collection;
 }
 
-let randFeat = randomPointsCollection();
+let randFeat = randPointsCollection();
 let points = JSON.stringify(randFeat, null, 2);
 fs.writeFile("points.json", points, (err) => {
   if (err) throw err;
