@@ -2,7 +2,6 @@
   "name": "geo-mock-api",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,6 +18,10 @@
   },
   "homepage": "https://github.com/Bryce-Davidson/geo-mock-api#readme",
   "dependencies": {
-    "@ngneat/falso": "^6.1.0"
-  }
+    "@mapbox/mapbox-sdk": "^0.13.7",
+    "@ngneat/falso": "^6.1.0",
+    "dotenv": "^16.0.3",
+    "node-fetch": "^3.3.0"
+  },
+  "devDependencies": {}
 }

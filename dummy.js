@@ -1,10 +1,10 @@
-import {
+const {
   randFloat,
   randUserName,
   randText,
   randCompanyName,
-} from "@ngneat/falso";
-import fs from "fs";
+} = require("@ngneat/falso");
+const fs = require("fs");
 
 function randLat() {
   return randFloat({ min: 48.45372, max: 48.426731, fraction: 6 });
@@ -40,8 +40,17 @@ function randPointsCollection() {
   return collection;
 }
 
-let randFeat = randPointsCollection();
-let points = JSON.stringify(randFeat, null, 2);
+function randWayPoints(count) {
+  let waypoints = [];
+  for (let index = 0; index < count; index++) {
+    waypoints.push({ coordinates: [randLon(), randLat()] });
+  }
+  console.log(waypoints);
+  return waypoints;
+}
+
+let randWaypoints = randWayPoints(2);
+let points = JSON.stringify(randWaypoints, null, 2);
 fs.writeFile("points.json", points, (err) => {
   if (err) throw err;
   console.log("Data written to file");
