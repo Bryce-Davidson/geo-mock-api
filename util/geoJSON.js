@@ -1,3 +1,4 @@
+const fs = require("fs");
 exports.createFeature = function (mbxGeometry) {
   return (collection = {
     type: "FeatureCollection",
@@ -8,5 +9,12 @@ exports.createFeature = function (mbxGeometry) {
         geometry: mbxGeometry,
       },
     ],
+  });
+};
+
+exports.writeJSON = function (path, json) {
+  fs.writeFile(path, json, (err) => {
+    if (err) throw err;
+    console.log("Data written to file");
   });
 };

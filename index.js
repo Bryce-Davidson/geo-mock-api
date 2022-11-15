@@ -1,8 +1,8 @@
 require("dotenv").config();
 const matchClient = require("@mapbox/mapbox-sdk/services/map-matching.js");
-const { writeJSON } = require("./util/sample");
-const { createFeature } = require("./util/geoJSON");
-
+const { createWaypoints } = require("./util/mapBoxTools");
+const { createFeature, writeJSON } = require("./util/geoJSON");
+const { routes } = require("./routes.js");
 const match = matchClient({ accessToken: process.env.MAPBOX_API_TOKEN });
 
 match
@@ -10,16 +10,14 @@ match
     tidy: true,
     geometries: "geojson",
     overview: "full",
-    points: [
-      { coordinates: [-123.34728647391623, 48.42076692987061] },
-      { coordinates: [-123.33258915427217, 48.42474150973405] },
-    ],
+    points: createWaypoints(routes.downtownWalk),
   })
   .send()
   .then((res) => {
+    console.log("Res");
     const geo = res.body.matchings[0].geometry;
     const feature = createFeature(geo);
-    const JSON = JSON.stringify(feature);
-    writeJSON("matched.json", JSON);
+    const data = JSON.stringify(feature);
+    writeJSON("matched.json", data);
   })
   .catch((e) => console.log(e));
