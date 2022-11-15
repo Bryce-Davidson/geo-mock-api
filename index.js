@@ -18,6 +18,8 @@ match
   .send()
   .then((res) => {
     const geo = res.body.matchings[0].geometry;
-    writeJSON("matched.json", JSON.stringify(createFeature(geo)));
+    const feature = createFeature(geo);
+    const JSON = JSON.stringify(feature);
+    writeJSON("matched.json", JSON);
   })
   .catch((e) => console.log(e));
