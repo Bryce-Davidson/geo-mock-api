@@ -1,21 +1,9 @@
 require("dotenv").config();
 const matchClient = require("@mapbox/mapbox-sdk/services/map-matching.js");
 const { writeJSON } = require("./util/sample");
+const { createFeature } = require("./util/geoJSON");
 
 const match = matchClient({ accessToken: process.env.MAPBOX_API_TOKEN });
-
-function createFeature(geometry) {
-  return (collection = {
-    type: "FeatureCollection",
-    features: [
-      {
-        type: "Feature",
-        properties: {},
-        geometry: geometry,
-      },
-    ],
-  });
-}
 
 match
   .getMatch({
